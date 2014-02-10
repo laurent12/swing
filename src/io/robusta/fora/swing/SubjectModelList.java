@@ -12,6 +12,39 @@ public class SubjectModelList implements ListModel<Comment> {
 	List<Comment> comments;
 	
 	
+	
+	public SubjectModelList(){
+		super();
+	}
+	
+	
+	/**
+	 * @param comments
+	 */
+	public SubjectModelList(List<Comment> comments) {
+		super();
+		this.comments = comments;
+	}
+
+	
+	
+	
+	/**
+	 * @return the comments
+	 */
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	
+	
 	@Override
 	public int getSize() {
 		return comments.size();

@@ -51,6 +51,15 @@ public class Subject implements Serializable, Flagable {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
+	
+	/**
+	 * @param Comment - the comment to add in the list
+	 */
+	public void addElement(Comment comment){
+		if(!comments.contains(comment))
+			comments.add(comment);
+	}
+	
 
 	// Using id and title
 	@Override

@@ -17,17 +17,25 @@ import javax.swing.JList;
 
 public class SubjectView extends JPanel {
 
+
 	Subject model;
 	SubjectController controller;
 	
+	
+	/**
+	 * Create the panel.
+	 */
+	public SubjectView() {
+		this.model = ForaDataSource.getInstance().getSubjects().get(0);
+		initView();
+
+	}
 	
 	public SubjectView(Subject model) {
 		super();
 		this.model = model;
 		initView();
 	}
-
-
 
 	private void initView() {
 		
@@ -59,24 +67,13 @@ public class SubjectView extends JPanel {
 		
 	}
 	
-	
-
-
-
-	/**
-	 * Create the panel.
-	 */
-	public SubjectView() {
-		this.model = ForaDataSource.getInstance().getSubjects().get(0);
-		initView();
-
-	}
-	
-	
 	public void setController(SubjectController controller) {
 		this.controller = controller;
 	}
-
 	
-	
+	public void reInit(){
+		this.removeAll();
+		this.revalidate();
+		initView();
+	}	
 }

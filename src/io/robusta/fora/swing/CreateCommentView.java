@@ -1,5 +1,7 @@
 package io.robusta.fora.swing;
 
+import io.robusta.fora.domain.Comment;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,16 +16,21 @@ import javax.swing.border.LineBorder;
 
 public class CreateCommentView extends JPanel {
 
+	
+	
 	CreateCommentController controller;
 	CreateCommentModel model;
-	
-	
 	JLabel errorLabel;
+	Comment comment;
+	
+	
+	
 	public CreateCommentView() {
 		model = new CreateCommentModel();
-		initView();
-		
+		initView();	
 	}
+	
+	
 	
 	public CreateCommentView(CreateCommentModel model ) {
 		this.model = model;
@@ -31,11 +38,13 @@ public class CreateCommentView extends JPanel {
 	}
 	
 	
+	
+	
 	/**
 	 * Create the panel.
 	 */
 	private void initView() {
-		setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
+		setBorder(new LineBorder(new Color(150, 20, 45), 3, true));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		
@@ -49,25 +58,34 @@ public class CreateCommentView extends JPanel {
 		JPanel buttonsPanel = new JPanel();
 		add(buttonsPanel);
 		
+		
+		
 		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String content = controller.cancelAction(contentPane.getText());
+				contentPane.setText(content);
+			}
+		});
 		buttonsPanel.add(cancelButton);
 		
+		
+		
 		JButton okButton = new JButton("OK");
-		okButton.addActionListener(new ActionListener() {
-			
+		okButton.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
-			
 				String content = contentPane.getText();
 				boolean isAnonymous = anonymousCheckBox.isSelected();
-				controller.createComment(content, isAnonymous);
-				
-			}
-			
+				comment = controller.createComment(content, isAnonymous);	
+			}	
 		});
 		buttonsPanel.add(okButton);
 		
+		
 		errorLabel = new JLabel("");
 		add(errorLabel);
+		
+		
 	}
 	
 	

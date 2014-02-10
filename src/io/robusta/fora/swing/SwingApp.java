@@ -40,7 +40,7 @@ public class SwingApp {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		/*
@@ -52,20 +52,46 @@ public class SwingApp {
 		//frame.getContentPane().add(commentView, BorderLayout.CENTER);
 		*/
 		
-		Subject subject = ForaDataSource.getInstance().getSubjects().get(0);
-		//Boilerplate for SubjectView
 		
-				
+		
+		
+		
+		
+		/*
+		 * Boilerplate for SubjectView
+		 * 
+		 * 1 - récupere dans la base le prmier sujet
+		 * 2 - créé une vue corrspondant aus sujets : subjectView.
+		 * 3 - créé le controleur des sujets (param le sujet et la vue créés précédement)
+		 * 4 - initialise le controleur dans la vue par une methode : setController
+		 *     qui prend en param le controleur créé précédement
+		 * 
+		 */
+		
+		Subject subject = ForaDataSource.getInstance().getSubjects().get(0);
+		
 		SubjectView subjectView = new SubjectView();
 		SubjectController subjectController = new SubjectController(subjectView, subject);
 		subjectView.setController(subjectController);
 		
 		
+		
+		
+		/*
+		 * 1 - Création du modele
+		 * 2 - initialise le sujet du model par setSubject() qui prend en parametre
+		 *	   le subect créé précédement.	 
+		 * 3 - création de la vue concernant les commentaires (qui prend en parametre
+		 * 	   le modele qui vient d'etre créé.
+		 * 4 - création du controleur CreateCommentController initialisation avec la vue
+		 *     et le modele qui viennent d'être créés.
+		 *     	
+		 */
 		CreateCommentModel createCommentModel = new CreateCommentModel();
 		createCommentModel.setSubject(subject);
 		CreateCommentView createCommentView = new CreateCommentView(createCommentModel);
 		
-		CreateCommentController createCommentController = new CreateCommentController(createCommentView, createCommentModel);
+		CreateCommentController createCommentController = new CreateCommentController(createCommentView, createCommentModel, subjectController);
 		createCommentView.setController(createCommentController );
 		
 		frame.getContentPane().add(subjectView, BorderLayout.CENTER);

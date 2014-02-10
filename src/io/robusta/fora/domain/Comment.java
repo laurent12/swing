@@ -14,21 +14,20 @@ public class Comment implements Serializable, Flagable {
 	
 	private static final long serialVersionUID = -1622931234744081145L;
 
-
+	int score;
 	String id;
-	
 	String content;
-
 	User user = null;
 	boolean anonymous = true;
 	List<Flag>flags = new ArrayList<Flag>();
 	
-	int score;
 	
 	
 	public Comment() {
 		this.id = UUID.randomUUID().toString();
 	}
+	
+	
 	public Comment(String email, String content) {
 		User user = new User();
 		user.setEmail(email);
@@ -36,6 +35,7 @@ public class Comment implements Serializable, Flagable {
 		this.id = UUID.randomUUID().toString();
 		this.content = content;
 	}
+	
 	
 	
 	//@XmlTransient
